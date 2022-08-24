@@ -1,0 +1,53 @@
+version: '3.4'
+services:
+  nexus:
+    image: soukron/acog-nexus:${TAG:-latest}
+    build:
+      context: src/
+      dockerfile: Nexus.Dockerfile
+    restart: on-failure
+    volumes:
+    - ./volumes/Nexus/data/:/opt/Nexus/data:rw,z
+
+  embedding:
+    image: soukron/acog-embedding:${TAG:-latest}
+    build:
+      context: src/
+      dockerfile: EmbeddingService.Dockerfile
+    restart: on-failure
+    environment:
+    - EMBEDDING_PORT=9999
+
+  simulation:
+    image: soukron/acog-simulation:${TAG:-latest}
+    #command: /bin/sleep 3600
+    build:
+      context: src/
+      dockerfile: SimulationService.Dockerfile
+    restart: on-failure
+    volumes:
+    - ./volumes/SimulationService/logs:/opt/SimulationService/logs:rw,z
+    - ./volumes/SimulationService/gpt3_logs:/opt/SimulationService/gpt3_logs:rw,z
+    environment:
+    - NEXUS_SERVICE_HOST=nexus
+    - NEXUS_SERVICE_PORT=8888
+    - EMBEDDING_SERVICE_HOST=embedding
+    - EMBEDDING_SERVICE_PORT=9999
+
+  imperative:
+    image: soukron/acog-imperative:${TAG:-latest}
+    #command: /bin/sleep 3600
+    build:
+      context: src/
+      dockerfile: ImperativeService.Dockerfile
+    restart: on-failure
+    volumes:
+    - ./volumes/ImperativeService/logs:/opt/ImperativeService/logs:rw,z
+    - ./volumes/ImperativeService/gpt3_logs:/opt/ImperativeService/gpt3_logs:rw,z
+    environment:
+    - NEXUS_SERVICE_HOST=nexus
+    - NEXUS_SERVICE_PORT=8888
+    - EMBEDDING_SERVICE_HOST=embedding
+    - EMBEDDING_SERVICE_PORT=9999
+
+
