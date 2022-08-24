@@ -20,7 +20,7 @@ services:
 
   simulation:
     image: soukron/acog-simulation:${TAG:-latest}
-    #command: /bin/sleep 3600
+    command: /bin/sleep 3600
     build:
       context: src/
       dockerfile: SimulationService.Dockerfile
@@ -36,7 +36,7 @@ services:
 
   imperative:
     image: soukron/acog-imperative:${TAG:-latest}
-    #command: /bin/sleep 3600
+    command: /bin/sleep 3600
     build:
       context: src/
       dockerfile: ImperativeService.Dockerfile
