@@ -3,6 +3,10 @@ MAINTAINER soukron@gmbros.net
 
 ENV TZ="Europe/Madrid"
 
+RUN apt-get update && \
+    apt-get install -y nano && \
+    apt-get clean all
+
 RUN mkdir -p /opt/EmbeddingService
 WORKDIR /opt/EmbeddingService
 

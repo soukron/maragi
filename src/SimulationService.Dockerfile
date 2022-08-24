@@ -7,7 +7,9 @@ RUN apt-get update && \
     apt-get install -y nano && \
     apt-get clean all
 
-RUN mkdir -p /opt/SimulationService/{gpt3_logs,logs}
+RUN mkdir -p /opt/SimulationService && \
+    mkdir -p /opt/SimulationService/gpt3_logs && \
+    mkdir -p /opt/SimulationService/logs
 WORKDIR /opt/SimulationService
 
 ADD SimulationService.requirements.txt /opt/SimulationService/requirements.txt

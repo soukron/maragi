@@ -7,7 +7,9 @@ RUN apt-get update && \
     apt-get install -y nano && \
     apt-get clean all
 
-RUN mkdir -p /opt/ImperativeService/{gpt3_logs,logs}
+RUN mkdir -p /opt/ImperativeService && \
+    mkdir -p /opt/ImperativeService/gpt3_logs && \
+    mkdir -p /opt/ImperativeService/logs
 WORKDIR /opt/ImperativeService
 
 ADD ImperativeService.requirements.txt /opt/ImperativeService/requirements.txt
