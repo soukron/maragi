@@ -1,0 +1,16 @@
+[submodule "src/Nexus"]
+	path = src/Nexus
+	url = https://github.com/soukron/Nexus
+	branch = soukron
+[submodule "src/EmbeddingService"]
+	path = src/EmbeddingService
+	url = https://github.com/soukron/EmbeddingService
+	branch = soukron
+[submodule "src/ImperativeService"]
+	path = src/ImperativeService
+	url = https://github.com/soukron/ImperativeService
+	branch = soukron
+[submodule "src/SimulationService"]
+	path = src/SimulationService
+	url = https://github.com/soukron/SimulationService
+	branch = soukron
